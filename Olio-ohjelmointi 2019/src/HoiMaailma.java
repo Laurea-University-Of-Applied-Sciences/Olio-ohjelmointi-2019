@@ -6,6 +6,6 @@ public class HoiMaailma {
 		
 		System.out.println("Hoi Maailma!");
 
-	}  
+	}   
 
 } 
