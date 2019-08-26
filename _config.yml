@@ -106,6 +106,7 @@ defaults:
     values:
       layout: single
       author_profile: true
+      sidebar: "docs"
 
 category_archive:
   type: liquid
