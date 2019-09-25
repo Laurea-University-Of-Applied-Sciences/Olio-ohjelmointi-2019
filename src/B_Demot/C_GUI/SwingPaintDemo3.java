@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseMotionAdapter;
@@ -27,9 +28,10 @@ public class SwingPaintDemo3 {
 	}
 
 	private static void createAndShowGUI() {
-		System.out.println("Created GUI on EDT? " + SwingUtilities.isEventDispatchThread());
+		System.out.println("Created GUI on EDT? ");
 		JFrame f = new JFrame("Swing Paint Demo");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		f.add(new MyPanel());
 		f.pack();
 		f.setVisible(true);
@@ -46,6 +48,8 @@ class MyPanel extends JPanel {
 	public MyPanel() {
 
 		setBorder(BorderFactory.createLineBorder(Color.black));
+		setFocusable(true);
+		requestFocusInWindow();
 
 		addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -59,14 +63,39 @@ class MyPanel extends JPanel {
 			}
 		});
 
-		addKeyListener(new KeyAdapter() {
+		addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
 			public void keyPressed(KeyEvent e) {
-				moveSquare(10, 10);
-				
-			 
-				System.out.println("Painoit");
+				int painettu = e.getKeyCode();
+
+				if (painettu == KeyEvent.VK_UP)
+					moveSquare(squareX, squareY - 10);
+				else if (painettu == KeyEvent.VK_DOWN)
+					moveSquare(squareX, squareY + 10);
+
+				else if (painettu == KeyEvent.VK_LEFT)
+					moveSquare(squareX - 10, squareY);
+
+				else if (painettu == KeyEvent.VK_RIGHT)
+					moveSquare(squareX + 10, squareY);
+
+				System.out.println("Painoit nappia: "+painettu);
+				System.out.println("X: " + squareX + "Y: " + squareY);
 			}
 		});
+
 	}
 
 	private void moveSquare(int x, int y) {
