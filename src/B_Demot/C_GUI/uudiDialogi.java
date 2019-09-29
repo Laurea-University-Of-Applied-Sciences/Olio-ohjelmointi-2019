@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class uudiDialogi extends JDialog {
 
@@ -49,6 +51,19 @@ public class uudiDialogi extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			textField = new JTextField();
+			textField.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent arg0) {
+					parent.setData("Luetaan muutoksen laukaisemana: " + textField.getText());
+				}
+			});
+			textField.addPropertyChangeListener(new PropertyChangeListener() {
+				public void propertyChange(PropertyChangeEvent evt) {
+					parent.setData("Luetaan muutoksen laukaisemana: " + textField.getText());
+					System.out.println(evt.getNewValue());
+
+				}
+			});
 			textField.setBounds(15, 40, 146, 26);
 			contentPanel.add(textField);
 			textField.setColumns(10);
