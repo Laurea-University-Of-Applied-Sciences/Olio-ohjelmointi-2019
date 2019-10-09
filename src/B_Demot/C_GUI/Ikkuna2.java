@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,10 +24,12 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
 public class Ikkuna2 extends JFrame {
+	Ikkuna2 parent;
+	JPanel contentPane;
+	JTextArea textArea = null;
 
-	private JPanel contentPane;
-	JTextArea textArea;
-	private Ikkuna2 parent;
+	JTextField nimi, osoite, puh;
+
 
 	/**
 	 * Launch the application.
@@ -47,6 +51,7 @@ public class Ikkuna2 extends JFrame {
 	 * Create the frame.
 	 */
 	public Ikkuna2() {
+		
 		this.parent = this;
 		setTitle("Uusi ikkuna");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -123,17 +128,13 @@ public class Ikkuna2 extends JFrame {
 		JButton btnKolmasNappi = new JButton("Kolmas nappi");
 		btnKolmasNappi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// System.out.println("Hoi Maailma!");
+
 				String viesti = textArea.getText();
 				System.out.println(viesti);
-				// JOptionPane.showConfirmDialog(null, up, "Syötä",
-				// JOptionPane.OK_CANCEL_OPTION);
-//				ikkunaToisenKutsumana i = new ikkunaToisenKutsumana();
-//				i.setVisible(true);
-				// System.out.println( "Luettiin ikkunasta: "+ i.getTextField().getText() );
-				uudiDialogi d = new uudiDialogi(parent);
+
+				uusiDialogi d = new uusiDialogi(parent);
 				d.setVisible(true);
-			 
+
 			}
 		});
 		panel_2.add(btnKolmasNappi);
@@ -149,7 +150,7 @@ public class Ikkuna2 extends JFrame {
 	}
 
 	public void setData(String s) {
-		this.textArea.setText(s);
+		this.textArea.append(s+"\n");
 	}
 
 }
