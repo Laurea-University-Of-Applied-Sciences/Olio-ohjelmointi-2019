@@ -1,7 +1,8 @@
-import java.security.KeyStore.Entry;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeSet;
 
 public class Tietorakenteita {
@@ -40,16 +41,32 @@ public class Tietorakenteita {
 
 		System.out.println("\nSanat HashMapista:\n");
 
-		// Iterator<Entry<String, String>> it = parit.entrySet().iterator();
+		// Foreachilla
 
 		for (String string : parit.keySet()) {
 			System.out.println(string + " ==> " + parit.get(string));
 		}
 
-//		while (it.hasNext()) {
-//			HashMap.Entry<String, String> alkio = (HashMap.Entry<String, String>) it.next();
-//			System.out.println(alkio.getKey() + " = " + alkio.getValue());
-//		}
+		// Lambda notaatiolla
+		parit.forEach((k, v) -> System.out.println(k + " : " + (v)));
+
+		
+		// Iteraattorilla, tapa 1
+		
+		Iterator<Entry<String, String>> it = parit.entrySet().iterator();
+
+		while (it.hasNext()) {
+			HashMap.Entry<String, String> alkio = (HashMap.Entry<String, String>) it.next();
+			System.out.println(alkio.getKey() + " = " + alkio.getValue());
+		}
+
+		Iteraattorilla, tapa 2
+		
+		System.out.println("HashMap Key-Value Pairs : ");
+		while (it.hasNext()) {
+			Map.Entry me = (Map.Entry) it.next();
+			System.out.println("Key is: " + me.getKey() + " & " + " value is: " + me.getValue());
+		}
 
 		System.out.println("\nAvaimen \"Viides\" arvo HashMapista:\n");
 		System.out.println(parit.get("kissa"));
